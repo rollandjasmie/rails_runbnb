@@ -1,0 +1,2 @@
+class Canape < ApplicationRecord
+end

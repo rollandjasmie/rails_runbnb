@@ -1,0 +1,2 @@
+class Lit < ApplicationRecord
+end

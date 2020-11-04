@@ -1,0 +1,2 @@
+class Autrelit < ApplicationRecord
+end
