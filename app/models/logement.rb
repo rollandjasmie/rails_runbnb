@@ -9,4 +9,5 @@ class Logement < ApplicationRecord
     has_many :chambres
     has_many :salons
     has_many :autres
+    has_many :photos
 end
