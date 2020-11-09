@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 2020_11_04_144634) do
     t.string "name"
     t.integer "quantite"
     t.boolean "checked"
-    t.string "canapes"
     t.bigint "salon_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
