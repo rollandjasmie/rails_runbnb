@@ -10645,3 +10645,124 @@ Processing by ChambresController#index as HTML
 Completed 200 OK in 203ms (Views: 48.2ms | ActiveRecord: 11.9ms | Allocations: 11563)
 
 
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (100.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (2032.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "runbnbrails_development"[0m
+  [1m[35m (1009.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "runbnbrails_test"[0m
+  [1m[35m (2626.8ms)[0m  [1m[35mCREATE DATABASE "runbnbrails_development" ENCODING = 'unicode'[0m
+  [1m[35m (1784.7ms)[0m  [1m[35mCREATE DATABASE "runbnbrails_test" ENCODING = 'unicode'[0m
+  [1m[35m (640.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (329.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1318294706029596750)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20201104141413)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (863.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "password_digest" character varying, "name" character varying, "first_name" character varying, "adresse" character varying, "mobile" character varying, "date_of_birth" character varying, "sexe" character varying, "urgence" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104141413"]]
+  [1m[35m (104.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLogements (20201104141743)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (492.6ms)[0m  [1m[35mCREATE TABLE "logements" ("id" bigserial primary key, "name" character varying, "categorie" character varying, "types" character varying, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (321.8ms)[0m  [1m[35mCREATE  INDEX  "index_logements_on_user_id" ON "logements"  ("user_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104141743"]]
+  [1m[35m (115.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAdresses (20201104142100)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (431.6ms)[0m  [1m[35mCREATE TABLE "adresses" ("id" bigserial primary key, "pays" character varying, "ville" character varying, "adresse" character varying, "code" character varying, "logement_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (321.4ms)[0m  [1m[35mCREATE  INDEX  "index_adresses_on_logement_id" ON "adresses"  ("logement_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142100"]]
+  [1m[35m (51.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAutres (20201104142113)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (572.3ms)[0m  [1m[35mCREATE TABLE "autres" ("id" bigserial primary key, "title" character varying, "logement_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (234.5ms)[0m  [1m[35mCREATE  INDEX  "index_autres_on_logement_id" ON "autres"  ("logement_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142113"]]
+  [1m[35m (124.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAutrelits (20201104142139)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (393.7ms)[0m  [1m[35mCREATE TABLE "autrelits" ("id" bigserial primary key, "name" character varying, "quantite" integer, "checked" boolean, "autre_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (125.3ms)[0m  [1m[35mCREATE  INDEX  "index_autrelits_on_autre_id" ON "autrelits"  ("autre_id")[0m
+  [1m[36mprimary::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142139"]]
+  [1m[35m (39.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCalendriers (20201104142149)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (68.8ms)[0m  [1m[35mCREATE TABLE "calendriers" ("id" bigserial primary key, "startDate" timestamp, "endDate" timestamp, "logement_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (262.6ms)[0m  [1m[35mCREATE  INDEX  "index_calendriers_on_logement_id" ON "calendriers"  ("logement_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142149"]]
+  [1m[35m (46.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCanapes (20201104142158)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (506.9ms)[0m  [1m[35mCREATE TABLE "canapes" ("id" bigserial primary key, "name" character varying, "quantite" integer, "checked" boolean, "salon_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (317.8ms)[0m  [1m[35mCREATE  INDEX  "index_canapes_on_salon_id" ON "canapes"  ("salon_id")[0m
+  [1m[36mprimary::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142158"]]
+  [1m[35m (145.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateChambres (20201104142206)
+  [1m[35m (1.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (313.8ms)[0m  [1m[35mCREATE TABLE "chambres" ("id" bigserial primary key, "title" character varying, "logement_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (229.8ms)[0m  [1m[35mCREATE  INDEX  "index_chambres_on_logement_id" ON "chambres"  ("logement_id")[0m
+  [1m[36mprimary::SchemaMigration Create (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142206"]]
+  [1m[35m (32.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateConditions (20201104142213)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (440.9ms)[0m  [1m[35mCREATE TABLE "conditions" ("id" bigserial primary key, "conditions" character varying, "logement_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (49.6ms)[0m  [1m[35mCREATE  INDEX  "index_conditions_on_logement_id" ON "conditions"  ("logement_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142213"]]
+  [1m[35m (24.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEquipements (20201104142224)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (102.6ms)[0m  [1m[35mCREATE TABLE "equipements" ("id" bigserial primary key, "title" character varying[] DEFAULT '{}', "logement_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (195.9ms)[0m  [1m[35mCREATE  INDEX  "index_equipements_on_logement_id" ON "equipements"  ("logement_id")[0m
+  [1m[36mprimary::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142224"]]
+  [1m[35m (23.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLits (20201104142235)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (255.0ms)[0m  [1m[35mCREATE TABLE "lits" ("id" bigserial primary key, "name" character varying, "quantite" integer, "checked" boolean, "chambre_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (196.2ms)[0m  [1m[35mCREATE  INDEX  "index_lits_on_chambre_id" ON "lits"  ("chambre_id")[0m
+  [1m[36mprimary::SchemaMigration Create (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142235"]]
+  [1m[35m (34.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMaps (20201104142251)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (197.7ms)[0m  [1m[35mCREATE TABLE "maps" ("id" bigserial primary key, "latitude" float, "longitude" float, "logement_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (229.8ms)[0m  [1m[35mCREATE  INDEX  "index_maps_on_logement_id" ON "maps"  ("logement_id")[0m
+  [1m[36mprimary::SchemaMigration Create (6.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142251"]]
+  [1m[35m (26.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePhotos (20201104142300)
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (419.0ms)[0m  [1m[35mCREATE TABLE "photos" ("id" bigserial primary key, "photo" json, "legend" character varying, "logement_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (234.5ms)[0m  [1m[35mCREATE  INDEX  "index_photos_on_logement_id" ON "photos"  ("logement_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142300"]]
+  [1m[35m (31.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRegles (20201104142308)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (106.8ms)[0m  [1m[35mCREATE TABLE "regles" ("id" bigserial primary key, "regle" character varying[] DEFAULT '{}', "arrive1" character varying, "arrive2" character varying, "depart1" character varying, "depart2" character varying, "logement_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (49.4ms)[0m  [1m[35mCREATE  INDEX  "index_regles_on_logement_id" ON "regles"  ("logement_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142308"]]
+  [1m[35m (31.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSalons (20201104142317)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (450.1ms)[0m  [1m[35mCREATE TABLE "salons" ("id" bigserial primary key, "title" character varying, "logement_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (222.8ms)[0m  [1m[35mCREATE  INDEX  "index_salons_on_logement_id" ON "salons"  ("logement_id")[0m
+  [1m[36mprimary::SchemaMigration Create (1.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104142317"]]
+  [1m[35m (28.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActiveStorageTables (20201104144634)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (704.8ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "byte_size" bigint NOT NULL, "checksum" character varying NOT NULL, "created_at" timestamp NOT NULL)[0m
+  [1m[35m (260.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_active_storage_blobs_on_key" ON "active_storage_blobs"  ("key")[0m
+  [1m[35m (480.5ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (205.1ms)[0m  [1m[35mCREATE  INDEX  "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments"  ("blob_id")[0m
+  [1m[35m (63.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_active_storage_attachments_uniqueness" ON "active_storage_attachments"  ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201104144634"]]
+  [1m[35m (25.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-11-09 10:40:17.631572"], ["updated_at", "2020-11-09 10:40:17.631572"]]
+  [1m[35m (24.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1318294706029596750)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
