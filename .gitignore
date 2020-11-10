@@ -1,0 +1,7 @@
+/log/*
+/tmp/*
+config/master.key
+/public/uploads
+.env
+.env.*
+node_modules/
