@@ -9,87 +9,101 @@ class LogementsController < ApplicationController
                     indexa<<index
                     adresse = index.adresse
                     adresses << adresse
-
-    end     
-  
-
-                render json: {logement:indexa,
-                adresse:adresses}            
+                    end     
+        
+                    render json: {logement:indexa,
+        adresse:adresses}            
     end
     
     def create
-       
-        @logement = Logement.new(logement_params)
+          puts '^^'*200
+        logement= params[:hebergement]
+        logement= JSON.parse(logement)
+        @logement = Logement.new(name:logement["name"],types:logement["types"],categorie:logement["categorie"])
         @logement.user_id = current_user.id
         @logement.save
+            
+     
         @chambre = Chambre.create(title:"Chambre",logement_id: @logement.id)
         @salon = Salon.create(title: "Salon",logement_id: @logement.id)
         @autre = Autre.create(title: "Autre espace",logement_id: @logement.id)
 
-
-        #adresse controller new
-        @adresse = Adresse.new(adresse_params)
+        adresse= params[:localisation]
+        adresse= JSON.parse(adresse)
+        @adresse = Adresse.new(pays:adresse["pays"],ville:adresse["ville"],adresse:adresse["adresse"],code:adresse["code"])
         @adresse.logement_id = @logement.id
         @adresse.save
+
+
         
         #map controller new
-        @map = Map.new(map_params)
+        mape= params[:map]
+        mape= JSON.parse(mape)
+        @map = Map.new(longitude:mape["longitude"],latitude:mape["latitude"])
         @map.logement_id = @logement.id
         @map.save
-
-        #conditions controller new
-        @condition = Condition.new(condition_params)
-        @condition.logement_id = @logement.id
-        @condition.save
-
-        #equipement controller new
-        @equipement = Equipement.new(params_equipement)
-        @equipement.logement_id=@logement.id
-        @equipement.save
-
-         #regle controller new
-         @regle = Regle.new(regle_params)
-         @regle.logement_id = @logement.id
-         @regle.save
-
-        #image controller new
-        # image = params[:photo]
-        # photo=Photo.new(photo:image)
-        # photo.logemenent_id=@logement.id
-        # photo.save!
-        # puts '$'*200
-        # puts params[:photo]
-        # puts '$'*200
-        
-
-
-        
-         #calendrier controller new
-         @cal = Calendrier.new(cal_params)
-         @cal.logement_id = @logement.id
-         @cal.save
-
-        lits = params[:Lits]
-        lits.each do |lit|
-               @lits = Lit.new(name:lit["name"],quantite:lit["quantite"],checked:lit["checked"])
-               @lits.chambre_id = @chambre.id
-               @lits.save
-            
-        end
-
+    
         canapes = params[:canapes]
+        canapes= JSON.parse(canapes)
         canapes.each do |canape|
             @lits = Canape.new(name:canape["name"],quantite:canape["quantite"],checked:canape["checked"])
             @lits.salon_id = @chambre.id
             @lits.save 
         end
         
+    
         autres = params[:autres]
+        autres= JSON.parse(autres)
         autres.each do |autre|
             @lits = Autrelit.new(name:autre["name"],quantite:autre["quantite"],checked:autre["checked"])
             @lits.autre_id = @chambre.id
             @lits.save 
         end
+        
+        title = params[:title]
+        title= JSON.parse(title)
+        @equipement = Equipement.new(title:title["title"])
+        @equipement.logement_id=@logement.id
+        @equipement.save
+
+        photos = params[:photo]
+        photos.each do |photo|
+            photo=Photo.new(photo:photo)
+            photo.logement_id=@logement.id
+            photo.save!
+        end
+    
+        #regle controller new
+        regles = params[:regles]
+        regles= JSON.parse(regles)
+         @regle = Regle.new(regle:regles["regle"],arrive1:regles["arrive1"],arrive2:regles["arrive2"],depart1:regles["depart1"],depart2:regles["depart2"])
+         @regle.logement_id = @logement.id
+         @regle.save
+         
+         #calendrier controller new
+        dates = params[:date]
+        dates= JSON.parse(dates)
+        @cal = Calendrier.new(startDate:dates["startDate"],endDate:dates["endDate"])
+        @cal.logement_id = @logement.id
+        @cal.save
+        
+        #conditions controller new
+        conditions = params[:conditions]
+        conditions= JSON.parse(conditions)
+        @condition = Condition.new(conditions:conditions["conditions"])
+        @condition.logement_id = @logement.id
+        @condition.save
+        
+        lits = params[:Lits]
+        lits= JSON.parse(lits)
+        puts lits
+        lits.each do |lit|
+               @lits = Lit.new(name:lit["name"],quantite:lit["quantite"],checked:lit["checked"])
+               @lits.chambre_id = @chambre.id
+               @lits.save     
+        end
+
+        
 
         render json:{
             lit:@lits,
@@ -117,28 +131,28 @@ class LogementsController < ApplicationController
 
      private 
 
-    def logement_params
-        params.require(:hebergement).permit(:name, :types, :categorie)
-    end
-    def adresse_params
-        params.require(:localisation).permit(:pays, :ville, :adresse, :code)
-    end
-    def params_equipement
-        params.require(:equipement).permit(title: [])
-    end
+    # def logement_params
+    #     params.require(:hebergement).permit(:name, :types, :categorie)
+    # end
+    # def adresse_params
+    #     params.require(:localisation).permit(:pays, :ville, :adresse, :code)
+    # end
+    # # def params_equipement
+    # #     params.require(:equipement).permit(title: [])
+    # # end
     
-    def map_params
-        params.require(:map).permit(:latitude, :longitude)
-    end
-    def condition_params
-        params.require(:conditions).permit(:conditions)
-    end
-    def regle_params
-        params.require(:regles).permit(:arrive1, :arrive2, :depart1, :depart2, regle: [])
-    end
-    def cal_params
-        params.require(:date).permit( :startDate , :endDate)
-    end
+    # def map_params
+    #     params.require(:map).permit(:latitude, :longitude)
+    # end
+    # def condition_params
+    #     params.require(:conditions).permit(:conditions)
+    # end
+    # def regle_params
+    #     params.require(:regles).permit(:arrive1, :arrive2, :depart1, :depart2, regle: [])
+    # end
+    # def cal_params
+    #     params.require(:date).permit( :startDate , :endDate)
+    # end
 end
 
 
