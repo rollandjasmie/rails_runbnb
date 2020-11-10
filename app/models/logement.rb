@@ -10,4 +10,9 @@ class Logement < ApplicationRecord
     has_many :salons
     has_many :autres
     has_many :photos
+    has_many :equi_courants
+    has_many :equi_familles
+    has_many :equi_logistiques
+    has_many :equi_securites
+    has_many :equi_suplementaires
 end
