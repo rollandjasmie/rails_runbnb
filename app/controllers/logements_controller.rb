@@ -60,11 +60,11 @@ class LogementsController < ApplicationController
             @lits.save 
         end
         
-        title = params[:title]
-        title= JSON.parse(title)
-        @equipement = Equipement.new(title:title["title"])
-        @equipement.logement_id=@logement.id
-        @equipement.save
+        # title = params[:title]
+        # title= JSON.parse(title)
+        # @equipement = Equipement.new(title:title["title"])
+        # @equipement.logement_id=@logement.id
+        # @equipement.save
 
         photos = params[:photo]
         photos.each do |photo|
@@ -102,8 +102,13 @@ class LogementsController < ApplicationController
                @lits.chambre_id = @chambre.id
                @lits.save     
         end
-
-        
+        title = params[:title]
+        title= JSON.parse(title)
+        EquiCourant.create(title:title["title"],logement_id: @logement.id)
+        EquiFamille.create(title:title["title"],logement_id: @logement.id)
+        EquiLogistique.create(title:title["title"],logement_id: @logement.id)
+        EquiSecurite.create(title:title["title"],logement_id: @logement.id)
+        EquiSuplementaire.create(title:title["title"],logement_id: @logement.id)
 
         render json:{
             lit:@lits,
