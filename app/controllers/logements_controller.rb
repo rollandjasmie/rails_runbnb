@@ -14,6 +14,14 @@ class LogementsController < ApplicationController
                     render json: {logement:indexa,
         adresse:adresses}            
     end
+    def show
+        logement = Logement.find(params[:id])
+        render json:{
+            logement:logement
+        }
+        
+    end
+    
     
     def create
           puts '^^'*200
@@ -121,7 +129,7 @@ class LogementsController < ApplicationController
     def update
         log = Logement.find_by(id:params[:id])
         
-        if log=log.update(name:params[:name],types:params[:types],categorie:params[:categorie])
+        if log=log.update(name:params[:name],types:params[:types],categorie:params[:categorie],description:params[:description],unique:params[:unique])
             render json: {
                 status: :log
             }
