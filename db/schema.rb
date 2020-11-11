@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_150722) do
+ActiveRecord::Schema.define(version: 2020_11_11_063323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "acces_voyageurs", force: :cascade do |t|
+    t.string "acces"
+    t.string "aide1"
+    t.string "aide2"
+    t.string "autre"
+    t.bigint "logement_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["logement_id"], name: "index_acces_voyageurs_on_logement_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false

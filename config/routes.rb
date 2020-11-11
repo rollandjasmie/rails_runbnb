@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :acces_voyageurs
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :users, only:[:show,:create,:update,]
   post "/login", to: "users#login"
@@ -11,6 +12,9 @@ Rails.application.routes.draw do
   put '/logements/:logement_id/equi_courants/',to:"equi_courants#update"
   get '/logements/:logement_id/equi_courants/',to:"equi_courants#index"
 
+  put '/logements/:logement_id/acces_voyageurs/',to:"acces_voyageurs#update"
+  get '/logements/:logement_id/acces_voyageurs/',to:"acces_voyageurs#index"
+  
   put '/logements/:logement_id/equi_familles/',to:"equi_familles#update"
   get '/logements/:logement_id/equi_familles/',to:"equi_familles#index"
   
