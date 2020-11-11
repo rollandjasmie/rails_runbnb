@@ -15,4 +15,6 @@ class Logement < ApplicationRecord
     has_many :equi_logistiques
     has_many :equi_securites
     has_many :equi_suplementaires
+    has_many :acces_voyageurs
+    has_many :ressouce_voyageurs
 end

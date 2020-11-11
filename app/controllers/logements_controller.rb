@@ -117,7 +117,8 @@ class LogementsController < ApplicationController
         EquiLogistique.create(title:title["title"],logement_id: @logement.id)
         EquiSecurite.create(title:title["title"],logement_id: @logement.id)
         EquiSuplementaire.create(title:title["title"],logement_id: @logement.id)
-
+        AccesVoyageur.create(acces:" ",aide1:" ",aide2:" ",autre:" ",logement_id:@logement.id)
+        RessouceVoyageur.create(title:" ",logement_id:@logement.id)
         render json:{
             lit:@lits,
             canape:@canape,
