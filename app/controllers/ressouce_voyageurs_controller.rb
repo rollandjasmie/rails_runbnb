@@ -12,7 +12,7 @@ class RessouceVoyageursController < ApplicationController
 
     def update
       logement = Logement.find(params[:logement_id])
-      ressources = logement.ressouce_voyageurs[0].title
-       ressources.update(title:params[:title])
+      ressources = logement.ressouce_voyageurs[0]
+       ressources.update(title:params[:ressources])
     end
 end
