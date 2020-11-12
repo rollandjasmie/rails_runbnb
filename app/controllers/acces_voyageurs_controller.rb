@@ -18,7 +18,7 @@ class AccesVoyageursController < ApplicationController
   def update
     logement = Logement.find_by(id:params[:logement_id])
     equipement = logement.acces_voyageurs[0]
-    if equipement.update(acces:params[:acces],aide1:params[:aide1],aide2:params[:aide2],autre:params[:autre])
+    if equipement.update(acces:params[:acces],aide1:params[:aide1],aide2:params[:aide2],autre:params[:autre],presentation:params[:presentation],transport:params[:transport])
       render json:{
         aces:equipement
       }

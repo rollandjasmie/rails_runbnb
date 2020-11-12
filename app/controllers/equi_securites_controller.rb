@@ -4,8 +4,11 @@ class EquiSecuritesController < ApplicationController
   def index
   logement = Logement.find_by(id:params[:logement_id])
   equipement = logement.equi_securites[0].title
+  equipements = logement.equi_securites[0]
+
      render json: {
-      securites:equipement
+      securites:equipement,
+      fichier:equipements
     }
   end
 
@@ -13,7 +16,7 @@ class EquiSecuritesController < ApplicationController
   def update
     logement = Logement.find_by(id:params[:logement_id])
     equipement = logement.equi_securites[0]
-    equipement.update(title:params[:title])
+    equipement.update(title:params[:title],Extincteur:params[:Extincteur],incendie:params[:incendie],gaz:params[:gaz],medicale:params[:medicale],Police:params[:Police])
 
   end
 end

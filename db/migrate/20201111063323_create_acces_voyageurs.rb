@@ -5,6 +5,8 @@ class CreateAccesVoyageurs < ActiveRecord::Migration[6.0]
       t.string :aide1
       t.string :aide2
       t.string :autre
+      t.string :presentation
+      t.string :transport
       t.belongs_to :logement, index: true
 
       t.timestamps

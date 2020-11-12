@@ -5,19 +5,26 @@ class LogementsController < ApplicationController
         logement = user.logements
         indexa=[]
         adresses=[]
+        photos=[]
                 logement.each do |index|
                     indexa<<index
                     adresse = index.adresse
                     adresses << adresse
+                    photos << index.photos[0]
                     end     
         
-                    render json: {logement:indexa,
-        adresse:adresses}            
+            render json: {
+                        logement:indexa,
+                        adresse:adresses,
+                        photos:photos
+                    }            
     end
     def show
         logement = Logement.find(params[:id])
+        adresse = logement.adresse.adresse
         render json:{
-            logement:logement
+            logement:logement,
+            adresse:adresse
         }
         
     end
@@ -117,7 +124,7 @@ class LogementsController < ApplicationController
         EquiLogistique.create(title:title["title"],logement_id: @logement.id)
         EquiSecurite.create(title:title["title"],logement_id: @logement.id)
         EquiSuplementaire.create(title:title["title"],logement_id: @logement.id)
-        AccesVoyageur.create(acces:" ",aide1:" ",aide2:" ",autre:" ",logement_id:@logement.id)
+        AccesVoyageur.create(acces:" ",aide1:" ",aide2:" ",autre:" ",presentation:" ",transport:" ",logement_id:@logement.id)
         RessouceVoyageur.create(title:" ",logement_id:@logement.id)
         render json:{
             lit:@lits,

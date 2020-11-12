@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2020_11_11_123516) do
     t.string "aide1"
     t.string "aide2"
     t.string "autre"
+    t.string "presentation"
+    t.string "transport"
     t.bigint "logement_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -137,6 +139,11 @@ ActiveRecord::Schema.define(version: 2020_11_11_123516) do
 
   create_table "equi_securites", force: :cascade do |t|
     t.string "title", default: [], array: true
+    t.string "Extincteur"
+    t.string "incendie"
+    t.string "gaz"
+    t.string "medicale"
+    t.string "Police"
     t.bigint "logement_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
