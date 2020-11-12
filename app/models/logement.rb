@@ -17,4 +17,5 @@ class Logement < ApplicationRecord
     has_many :equi_suplementaires
     has_many :acces_voyageurs
     has_many :ressouce_voyageurs
+    has_many :parms_reservations
 end

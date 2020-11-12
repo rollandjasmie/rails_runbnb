@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :ressouce_voyageurs
+  get 'regles/index'
+  get 'regles/update'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :users, only:[:show,:create,:update,]
   post "/login", to: "users#login"
@@ -17,6 +18,10 @@ Rails.application.routes.draw do
 
   put '/logements/:logement_id/ressouce_voyageurs/',to:"ressouce_voyageurs#update"
   get '/logements/:logement_id/ressouce_voyageurs/',to:"ressouce_voyageurs#index"
+
+  put '/logements/:logement_id/parms_reservations/',to:"parms_reservations#update"
+  get '/logements/:logement_id/parms_reservations/',to:"parms_reservations#index"
+  
   
   put '/logements/:logement_id/equi_familles/',to:"equi_familles#update"
   get '/logements/:logement_id/equi_familles/',to:"equi_familles#index"
@@ -32,9 +37,15 @@ Rails.application.routes.draw do
 
   get '/logements/:logement_id/adresses',to:"adresses#show"
   put "/logements/:longement_id/adresse",to:"adresses#update"
+  
   put "/avatar",to:"avatars#create"
+  
   put '/logements/:longement_id/map',to:"maps#update"
+
   put '/logements/:longement_id/conditions',to:"conditions#upadte"
+  get '/logements/:longement_id/conditions',to:"conditions#index"
 
-
+  put '/logements/:longement_id/regles',to:"regles#upadte"
+  get '/logements/:longement_id/regles',to:"regles#index"
+  
 end

@@ -91,9 +91,11 @@ class LogementsController < ApplicationController
         #regle controller new
         regles = params[:regles]
         regles= JSON.parse(regles)
-         @regle = Regle.new(regle:regles["regle"],arrive1:regles["arrive1"],arrive2:regles["arrive2"],depart1:regles["depart1"],depart2:regles["depart2"])
-         @regle.logement_id = @logement.id
-         @regle.save
+        ParmsReservation.create(title:regles["regle"],autre:" ",logement_id:@logement.id)
+         
+        @regle = Regle.new(arrive1:regles["arrive1"],arrive2:regles["arrive2"],depart1:regles["depart1"],depart2:regles["depart2"])
+        @regle.logement_id = @logement.id
+        @regle.save
          
          #calendrier controller new
         dates = params[:date]
