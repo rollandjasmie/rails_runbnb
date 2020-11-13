@@ -18,4 +18,6 @@ class Logement < ApplicationRecord
     has_many :acces_voyageurs
     has_many :ressouce_voyageurs
     has_many :parms_reservations
+    has_one  :caution
+    has_many :frais_suples
 end

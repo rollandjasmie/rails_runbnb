@@ -128,6 +128,7 @@ class LogementsController < ApplicationController
         EquiSuplementaire.create(title:title["title"],logement_id: @logement.id)
         AccesVoyageur.create(acces:" ",aide1:" ",aide2:" ",autre:" ",presentation:" ",transport:" ",logement_id:@logement.id)
         RessouceVoyageur.create(title:" ",logement_id:@logement.id)
+        Caution.create(montant:"0 €",type_de_payment:"Carte bancaire",logement_id: @logement.id)
         render json:{
             lit:@lits,
             canape:@canape,

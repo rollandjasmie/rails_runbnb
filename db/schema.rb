@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_12_083126) do
+ActiveRecord::Schema.define(version: 2020_11_13_064113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,15 @@ ActiveRecord::Schema.define(version: 2020_11_12_083126) do
     t.index ["salon_id"], name: "index_canapes_on_salon_id"
   end
 
+  create_table "cautions", force: :cascade do |t|
+    t.string "montant"
+    t.string "type_de_payment"
+    t.bigint "logement_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["logement_id"], name: "index_cautions_on_logement_id"
+  end
+
   create_table "chambres", force: :cascade do |t|
     t.string "title"
     t.bigint "logement_id"
@@ -164,6 +173,16 @@ ActiveRecord::Schema.define(version: 2020_11_12_083126) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["logement_id"], name: "index_equipements_on_logement_id"
+  end
+
+  create_table "frais_suples", force: :cascade do |t|
+    t.string "types"
+    t.string "montant"
+    t.string "facturation"
+    t.bigint "logement_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["logement_id"], name: "index_frais_suples_on_logement_id"
   end
 
   create_table "lits", force: :cascade do |t|
