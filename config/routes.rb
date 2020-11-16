@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  resources :frais_suples
-  resources :cautions
+ 
   get 'regles/index'
   get 'regles/update'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -9,7 +8,7 @@ Rails.application.routes.draw do
   get "/auto_login", to: "users#auto_login"
 
   resources :logements do
-  resources :chambres, only:[:index,:upadate]
+  resources :chambres, only:[:index,:upadate,:create]
   resources :photos
     end
   put '/logements/:logement_id/equi_courants/',to:"equi_courants#update"
@@ -20,7 +19,7 @@ Rails.application.routes.draw do
 
   get '/logements/:logement_id/frais_suples/',to:"frais_suples#index"
   post '/logements/:logement_id/frais_suples/',to:"frais_suples#create"
-  put '/logements/:logement_id/frais_suples/:id',to:"frais_suples#update"
+  delete '/frais_suples/:id',to:"frais_suples#delete"
 
   put '/logements/:logement_id/acces_voyageurs/',to:"acces_voyageurs#update"
   get '/logements/:logement_id/acces_voyageurs/',to:"acces_voyageurs#index"

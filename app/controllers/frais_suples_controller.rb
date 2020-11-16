@@ -8,7 +8,7 @@ class FraisSuplesController < ApplicationController
     if logement.frais_suples.present?  
         frais_suples = logement.frais_suples
        render json:{
-         ok:frais_suples
+         frais_suples:frais_suples
        }
     else
       render json:{
@@ -32,13 +32,9 @@ class FraisSuplesController < ApplicationController
     end
   end
 
-  def update
-    logement = Logement.find(params[:logement_id])
+  def delete
     frais_suple = FraisSuple.find(params[:id])
-    if frais_suple.update(types:params[:types], montant:params[:montant], facturation:params[:facturation])
-      render json: {
-        frais_suple:frais_suple}
-    end
+    frais_suple.delete
   end
 
 end

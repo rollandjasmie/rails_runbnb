@@ -4,9 +4,14 @@ class CautionsController < ApplicationController
   # GET /cautions
   def index
     logement = Logement.find(params[:logement_id])
-    caution = logement.caution
+    montant = logement.caution.montant
+    type_de_payment = logement.caution.type_de_payment
+    id = logement.caution.id
+
     render json:{
-      caution:caution
+      montant:montant,
+      type_de_payment:type_de_payment,
+      id:id
     }
 
   end
